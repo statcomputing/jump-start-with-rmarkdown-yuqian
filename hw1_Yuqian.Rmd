@@ -17,9 +17,9 @@ output:
   bookdown::pdf_document2
   bookdown::html_document2
 abstract: |
-    This is a first homework for STAT5361 Statistical Computation that is 
-    designed for getting familiar with RMarkdown. In this homework, we will 
-    approximate one integration by Monte Carlo methods with sampling 
+    This is the first homework for STAT5361 Statistical Computation which is 
+    designed for getting familiar with RMarkdown. In this homework, I will 
+    approximate one integration by Monte Carlo method with sampling 
     from Normal distribution function N(0,1). The experiments would be 
     conducted at 3 different sample sizes, with 9 different upper limits. 
     The key-step derivation and results will be presented. Ture values will
@@ -56,9 +56,24 @@ knitr::opts_chunk$set(fig.width = 5, fig.height = 4, dpi = 300,
 
 # Introduction {#sec:intro}
 
+Homework 1 is using the template provided by Wenjie Wang to organize ...
 This document is designed as a template for data science lab projects.  However,
 it can also be used as a general template in `r proglang("R Markdown")` for a
 single document.
+
+
+Introduce Monte Carlo method
+
+
+The rest of this homework is organized as follows: Section \@ref(sec:problem)
+will give problem discription. In Section \@ref(sec:math),
+mathematical derivation will be illustrated. The procedure of solving this
+integration will be presented step by step. The results of different scenarios
+will be given in Section \@ref(sec:results). The ture value of the integrals 
+will also be calculated as references. Section \@ref(sec:figure) will give box
+plots of the bias, after repeating each case 100 times. A brief demonstration
+of a code chunk is given in Section \@ref(sec:code). In the end, summary and
+discussion will be presented in Section \@ref(sec:summary).
 
 
 The benefits of setting up a template in `r proglang("R Markdown")` are
@@ -98,7 +113,63 @@ external resources for further reading and more advanced usage of
 
 
 
-# Math Equations {#sec:math}
+# Problem Formulation{#sec:problem}
+
+
+Consider approximation of the distribution function of $N(0,1)$,
+\begin{align}
+    \Phi (t) = \int_\infty ^t {\frac{1}{{2\pi }}} {e^{ - {y^2}/2}}dy
+    (\#eq:integral)
+\end{align}
+by the Monte Carlo methods:
+\begin{align}
+   \hat \Phi (t) = \frac{1}{n}\sum\limits_{i = 1}^n {I({X_i} \le t)}
+   (\#eq:final)
+\end{align}
+where $X_i$'s are iid $N(0,1)$ variables. Experiment with the approximation at
+$n \in \{ {10^2},{10^3},{10^4}\} $ at 
+$t \in \{0.0,0.67,0.84,1.28,1.65,2.32,2.58,3.09,3.72\} $ to form a table. The 
+table should include the true value for comparison. Further repeat the experiment
+100 times. Draw box plots of the bias at all $t$.
+
+
+
+# Math Derivation {#sec:math}
+
+
+Consider Equation \@ref(eq:integral) in this form,
+\begin{align}
+    \Phi (t) = \int_{ - \infty }^\infty  {h(y)g(y)} dy
+    (\#eq:)
+\end{align}
+where 
+\begin{align}
+   h(y) = \left\{ {\begin{array}{*{20}{c}} {{1 \mathord{\left/
+   {\vphantom {1 {\sqrt {2\pi } }}} \right.
+   \kern-\nulldelimiterspace} {\sqrt {2\pi } }}}&{y \le t}\\0&{y > t}
+   \end{array}} \right.
+\end{align} and $g(y) = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$.
+Based on Monte Carlo method,
+
+
+Step 1: $h(y) = \left\{ {\begin{array}{*{20}{c}}
+{{1 \mathord{\left/
+ {\vphantom {1 {\sqrt {2\pi } }}} \right.
+ \kern-\nulldelimiterspace} {\sqrt {2\pi } }}}&{y \le t}\\
+0&{y > t}
+\end{array}} \right.$
+
+
+Step 2: $g(y) = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$
+
+\[p(y) = \frac{{g(y)}}{{\int_{ - \infty }^\infty  {g(y)dy} }} = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}\]
+
+
+step 3:
+
+
+Step 4: $\hat \Phi (t) = C{\rm E}[h(x)] \approx \frac{C}{n}\sum\limits_{i = 1}^n {h({x_i})}  = \frac{1}{n}\sum\limits_{i = 1}^n {I({X_i} \le t)} $ 
+
 
 Inline math expressions are quoted by `$` in the source document, which is
 consistent with the syntax of `r latex`. For instance, $x_i^2$, $\sin(x)$, and
