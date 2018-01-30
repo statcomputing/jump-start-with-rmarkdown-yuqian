@@ -118,7 +118,7 @@ external resources for further reading and more advanced usage of
 
 Consider approximation of the distribution function of $N(0,1)$,
 \begin{align}
-    \Phi (t) = \int_\infty ^t {\frac{1}{{2\pi }}} {e^{ - {y^2}/2}}dy
+    \Phi (t) = \int_\infty ^t {\frac{1}{\sqrt{2\pi }}} {e^{ - {y^2}/2}}dy
     (\#eq:integral)
 \end{align}
 by the Monte Carlo methods:
@@ -140,52 +140,50 @@ table should include the true value for comparison. Further repeat the experimen
 Consider Equation \@ref(eq:integral) in this form,
 \begin{align}
     \Phi (t) = \int_{ - \infty }^\infty  {h(y)g(y)} dy
-    (\#eq:)
+    (\#eq:montecarlo)
 \end{align}
-where 
-\begin{align}
-   h(y) = \left\{ {\begin{array}{*{20}{c}} {{1 \mathord{\left/
-   {\vphantom {1 {\sqrt {2\pi } }}} \right.
-   \kern-\nulldelimiterspace} {\sqrt {2\pi } }}}&{y \le t}\\0&{y > t}
-   \end{array}} \right.
-\end{align} and $g(y) = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$.
+
+
 Based on Monte Carlo method,
 
 
-Step 1: $h(y) = \left\{ {\begin{array}{*{20}{c}}
-{{1 \mathord{\left/
- {\vphantom {1 {\sqrt {2\pi } }}} \right.
- \kern-\nulldelimiterspace} {\sqrt {2\pi } }}}&{y \le t}\\
-0&{y > t}
-\end{array}} \right.$
+`Step 1`: Define $h(y) = \left\{ {\begin{array}{*{20}{c}} 1&{y \le t}\\ 0&{y > t} \end{array}} \right.$
 
 
-Step 2: $g(y) = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$
 
-\[p(y) = \frac{{g(y)}}{{\int_{ - \infty }^\infty  {g(y)dy} }} = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}\]
-
-
-step 3:
+`Step 2`: Define $g(y) = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$.
+Thus, the probability distribution function
+$p(y) = \frac{{g(y)}}{{\int_{ - \infty }^\infty  {g(y)dy} }} = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$
 
 
-Step 4: $\hat \Phi (t) = C{\rm E}[h(x)] \approx \frac{C}{n}\sum\limits_{i = 1}^n {h({x_i})}  = \frac{1}{n}\sum\limits_{i = 1}^n {I({X_i} \le t)} $ 
+`Step 3`: Draw $N$ independent and identically distributed random samples from $p(y)$.
 
 
-Inline math expressions are quoted by `$` in the source document, which is
-consistent with the syntax of `r latex`. For instance, $x_i^2$, $\sin(x)$, and
-$\theta$ are inline expressions. The equations can be simply quoted by `$$` if
-no cross-reference is needed, where regular `r latex` commands under the math
-environment can be used.  For equations that need cross-referencing,
-`r latex` environments for mathematical equations, such as `equation` or `align`,
-can be used directly. For example, Equation \@ref(eq:euler) is the well-known
-Euler's identity.
-\begin{align}
-    e^{i\theta} = \cos(\theta) + i \sin(\theta).
-    (\#eq:euler)
-\end{align}
+`Step 4`: Evaluate
+$\hat \Phi (t) = C{\rm E}[h(x)] \approx \frac{C}{n}\sum\limits_{i = 1}^n {h({x_i})}  = \frac{1}{n}\sum\limits_{i = 1}^n {I({X_i} \le t)} $ 
+based on samples from step3.
 
 
-# Math Theorem Environments  {#sec:theorem}
+
+# Results  {#sec:results}
+
+Experiments with the approximation at $n \in \{ {10^2},{10^3},{10^4}\} $ and 
+$t \in \{0.0,0.67,0.84,1.28,1.65,2.32,2.58,3.09,3.72\} $ are  shown in Table
+\@ref(tab:1st_table). The true values of integration are also provided for comparison.
+
+# table??
+(ref:theorem-envs) Theorem environments in `r pkg("bookdown")`.
+
+<!-- source extracted from bookdown package  -->
+
+```{r theorem-envs, echo = FALSE}
+knitr::kable(data.frame(
+  Environment = names(bookdown:::theorem_abbr),
+  `Printed Name` = unname(unlist(bookdown:::label_names_math)),
+  `Label Prefix` = unname(bookdown:::theorem_abbr),
+  stringsAsFactors = FALSE, check.names = FALSE
+), caption = '(ref:theorem-envs)', booktabs = TRUE)
+```
 
 A mathematical theorem can be put inside a `theorem` chunk followed by its
 label. For example, the Central Limit Theorem (CLT) is presented in Theorem
@@ -221,7 +219,7 @@ $$
 All the available theorem environments and their label prefix designed for
 cross-referencing are summarized in Table \@ref(tab:theorem-envs).
 
-
+# table
 (ref:theorem-envs) Theorem environments in `r pkg("bookdown")`.
 
 <!-- source extracted from bookdown package  -->
