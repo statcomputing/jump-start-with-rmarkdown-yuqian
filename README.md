@@ -1,42 +1,24 @@
-Data Science Lab Project Templates
+STAT 5361 Practise Homework -- Yuqian Liu
 ==============================
 
-The repository provides R Markdown templates for data science lab projects.
+The repository presents the work done by Yuqian.  A R Markdown templates 
+provided by Wenjie Wang was adopted here.
 
 
-## Getting Started
+## Files for This Practise
 
-We may download and unpack the [ZIP][zip] file of the repository, then compile
-the source document within [RStudio][rstudio] (by clicking the button *knit* or
-hitting the shortcut *Ctrl+Shift+K*).
-
-Alternatively (and probably more efficiently), we may clone the repository and
-let the Makefile help reproduce the output as follows:
-
-```bash
-git clone https://github.com/statds/dslab-templates.git
-cd dslab-templates
-make       # for output in pdf and html
-```
-
-The available targets in the Makefile include
-
-- `all`, default target for output in PDF and HTML.
-- `pdf` for PDF output only
-- `html`  for HTML output only
-- `clean` for cleaning some temporary files such as `*.log` and `*.aux`.
-- `rmCache` for cleaning cache files, which can be crucial if we modified
-    code chunk for a new evaluation.
+- `hw1_Yuqian`, the Rmd file for generating report of this homework.
+- `main_yuqian`, the R file for main program of calculation. 
+- `boxplot`, the png file for box plotting example.
 
 
-## Output Preview
+## Acknowledgment
+
+Thanks to Wenjie Wang's template, which isavailable at GitHub repository
+*dslab-templates*: <https://github.com/statds/dslab-templates>.
 
 The output of the templates in PDF and HTML are available for preview.
 
 - [PDF](https://statds.github.io/dslab-templates/template.pdf)
 - [HTML](https://statds.github.io/dslab-templates/)
 
-
-
-[zip]: https://github.com/statds/dslab-templates/archive/master.zip
-[rstudio]: https://www.rstudio.com/

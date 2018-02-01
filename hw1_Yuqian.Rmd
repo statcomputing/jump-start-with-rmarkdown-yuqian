@@ -8,8 +8,8 @@ date: "`r format(Sys.time(), '%d %B %Y')`"
 documentclass: article
 papersize: letter
 fontsize: 11pt
-bibliography: template.bib
-biblio-style: datalab
+# bibliography: template.bib
+# biblio-style: datalab
 keywords: Approximation, Monte Carlo, Normal Destribution, R Markdown, bookdown
 # keywords set in YAML header here only go to the properties of the PDF output
 # the keywords that appear in PDF output are set in latex/before_body.tex
@@ -57,30 +57,31 @@ knitr::opts_chunk$set(fig.width = 5, fig.height = 4, dpi = 300,
 
 # Introduction {#sec:intro}
 
-This homework is using the template provided by Wenjie Wang. The purpose of this 
-homework is to let us get familiar with RMarkdown. 
+This homework is using the template provided by Wenjie Wang. The purpose 
+of this homework is to let us get familiar with RMarkdown. 
 
 
-The problem is about to approximate the value of Cumulative Distribution Function
-(C. D. F.) by [Monte Carlo methods][wiki], which are computational algorithms 
-that rely on repeated random sampling to obtain numerical results.The CDF of a 
-continuous random variable X can be expressed as the integral of its probability 
-density function. In this problem, it is Normal distribution function $N(0,1)$. 
-The experiments would be conducted with 3 different sample sizes, to approximate
-integration value with 9 different upper limits. Then, each case will be 
-repeated 100 times.
+The problem is about to approximate the value of Cumulative Distribution 
+Function (C. D. F.) by [Monte Carlo methods][wiki], which are computational
+algorithms that rely on repeated random sampling to obtain numerical
+results.The CDF of a continuous random variable X can be expressed as 
+the integral of its probability density function. In this problem, it is
+Normal distribution function $N(0,1)$. The experiments would be conducted
+with 3 different sample sizes, to approximate integration value with 9
+different upper limits. Then, each case will be repeated 100 times.
 
 
-The rest of this homework is organized as follows: Section \@ref(sec:problem)
-will give problem discription. In Section \@ref(sec:math),
-mathematical derivation will be illustrated. The procedure of solving this
-integration will be presented step by step. The one-run results of different 
-scenarios will be given in Section \@ref(sec:results). The ture value of the 
-integrals will also be calculated as references. After repeating each case 
-100 times, Section \@ref(sec:figure) will give box plots of the bias. Discussion
-based on those plots will be presented. The code chunk of this homework's 
-calculation is given in Section \@ref(sec:code). In the end, summary will 
-be presented in Section \@ref(sec:summary).
+The rest of this homework is organized as follows: Section
+\@ref(sec:problem) will give problem discription. In Section
+\@ref(sec:math), mathematical derivation will be illustrated. The 
+procedure of solving this integration will be presented step by step. 
+The one-run results of different scenarios will be given in Section 
+\@ref(sec:results). The ture value of the integrals will also be calculated
+as references. After repeating each case 100 times, Section
+\@ref(sec:figure) will give box plots of the bias. Discussion
+based on those plots will be presented. The code chunk of this 
+homework's calculation is given in Section \@ref(sec:code). In the 
+end, summary will be presented in Section \@ref(sec:summary).
 
 
 
@@ -97,13 +98,14 @@ by the Monte Carlo methods:
    \hat \Phi (t) = \frac{1}{n}\sum\limits_{i = 1}^n {I({X_i} \le t)}
    (\#eq:final)
 \end{align}
-where $X_i$'s are independent, identically distributed (i.i.d.) $N(0,1)$ variables. 
+where $X_i$'s are independent, identically distributed (i.i.d.) 
+$N(0,1)$ variables. 
 
 
 Experiment with the approximation at $n\in\{{10^2},{10^3},{10^4}\}$ at 
 $t\in\{0.0,0.67,0.84,1.28,1.65,2.32,2.58,3.09,3.72\}$ to form a table. The 
-table should include the true value for comparison. Further repeat the experiment
-100 times. Draw box plots of the bias at all $t$.
+table should include the true value for comparison. Further repeat the
+experiment 100 times. Draw box plots of the bias at all $t$.
 
 
 
@@ -119,7 +121,8 @@ Consider Equation \@ref(eq:integral) in this form,
 Based on Monte Carlo method,
 
 
-**Step 1**: Define $h(y) = \left\{ {\begin{array}{*{20}{c}} 1&{y \le t}\\ 0&{y > t} \end{array}} \right.$
+**Step 1**: Define 
+$h(y) = \left\{ {\begin{array}{*{20}{c}} 1&{y \le t}\\0&{y > t} \end{array}} \right.$
 
 
 **Step 2**: Define $g(y) = \frac{1}{{\sqrt {2\pi } }}{e^{ - {y^2}/2}}$.
@@ -157,10 +160,11 @@ knitr::kable(final_data_1, caption = 'Ture Values and Prediction Values', bookta
 
 # Results for 100-times Run {#sec:figure}
 
-Next step is repeating each case 100 times. Box plots are generated to demonstrate results. 
-Figure \@ref(fig:s100) shows predictions with 100 random samples. Predictions with 1000 
-and 10000 samples are shown in Figure \@ref(fig:s1000) and Figure \@ref(fig:s10000) 
-respectively. One of code chunks how to plot box plots is shown as follow.
+Next step is repeating each case 100 times. Box plots are generated to 
+demonstrate results. Figure \@ref(fig:s100) shows predictions with 100 
+random samples. Predictions with 1000 and 10000 samples are shown in 
+Figure \@ref(fig:s1000) and Figure \@ref(fig:s10000) respectively. 
+One of code chunks how to plot box plots is shown as follow.
 
 <!-- caption of figure may be defined as follows: -->
 
@@ -176,8 +180,9 @@ boxplot(Pred_1000 ~ t, data = final_data_100, xlab = "t",ylab = "Predictions")
 boxplot(Pred_10000 ~ t, data = final_data_100, xlab = "t",ylab = "Predictions")
 ```
 
-If we would like to see box plots of bias for cases with different sample sizes, Figure 
-\@ref(fig:bias100), \@ref(fig:bias1000) and \@ref(fig:bias10000) are given as follow.
+If we would like to see box plots of bias for cases with different sample 
+sizes, Figure \@ref(fig:bias100), \@ref(fig:bias1000) and
+\@ref(fig:bias10000) are given as follow.
 
 (ref:bias100) Bias of 100-run Predictions with 100 samples.
 
@@ -196,8 +201,9 @@ boxplot(bias_1000 ~ t, data = final_data_bias, xlab = "t",ylab = "Prediction Bia
 ```{r bias10000, echo = FALSE, fig.cap = "(ref:bias10000)", fig.width = 8}
 boxplot(bias_10000 ~ t, data = final_data_bias, xlab = "t",ylab = "Prediction Bias")
 ```
-Based on results, with increasing sample size, the predictions present smaller bias.
-If the algorithm works well, we could say more accurate approximation would be obtained.
+Based on results, with increasing sample size, the predictions present 
+smaller bias. If the algorithm works well, we could say more accurate
+approximation would be obtained.
 
 
 # Code Chunk {#sec:code}
@@ -277,16 +283,17 @@ final_data_bias <- data.frame(t = T, bias_100 = bias100, bias_1000 = bias1000,
                               bias_10000 = bias10000)
 ```
 
-The chunk option `eval = FALSE` is set, in order to present the code without evaluation.
+The chunk option `eval = FALSE` is set, in order to present the code without 
+evaluation.
 
 
 
 # Summary {#sec:summary}
 
-I approximated the integration accurately by Monte Carlo Methods. I used the 
-template to report what I have done for this practise.  I tried some functions 
-and syntax of writing a *.Rmd* document. Overall, through this homework, I am 
-getting familiar with R and RMarkdown. 
+I approximated the integration accurately by Monte Carlo Methods. I used 
+the template to report what I have done for this practise.  I tried some
+functions and syntax of writing a *.Rmd* document. Overall, through this
+homework, I am getting familiar with R and RMarkdown. 
 
 
 
@@ -298,6 +305,5 @@ And thanks to all the other authors and contributors.
 
 
 # Reference {-}
-
 
 [wiki]: https://en.wikipedia.org/wiki/Monte_Carlo_method
