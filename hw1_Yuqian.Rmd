@@ -285,7 +285,7 @@ The chunk option `eval = FALSE` is set, in order to present the code without eva
 
 I approximated the integration accurately by Monte Carlo Methods. I used the 
 template to report what I have done for this practise.  I tried some functions 
-and syntax of writing a $.Rmd$ document. Overall, through this homework, I am 
+and syntax of writing a *.Rmd* document. Overall, through this homework, I am 
 getting familiar with R and RMarkdown. 
 
 
