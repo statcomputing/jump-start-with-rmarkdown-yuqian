@@ -13,9 +13,9 @@ biblio-style: datalab
 keywords: Approximation, Monte Carlo, Normal Destribution, R Markdown, bookdown
 # keywords set in YAML header here only go to the properties of the PDF output
 # the keywords that appear in PDF output are set in latex/before_body.tex
-output:
-# bookdown::pdf_document2
-  bookdown::html_document2
+output: pdf_documnet
+# bookdown::pdf_document
+# bookdown::html_document
 abstract: |
     This is the first homework for STAT5361 Statistical Computat     ion which is 
     designed for getting familiar with RMarkdown. In this homework, I will 

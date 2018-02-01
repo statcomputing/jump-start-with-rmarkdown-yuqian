@@ -1,0 +1,5 @@
+setwd("C:/Users/YUL12013/Documents/GitHub/jump-start-with-rmarkdown-yuqian")
+require(knitr)
+require(markdown)
+knit("hw1_Yuqian.Rmd")
+pandoc('hw1_Yuqian.md', format='latex')
