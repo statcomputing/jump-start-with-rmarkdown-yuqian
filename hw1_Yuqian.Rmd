@@ -1,5 +1,5 @@
 ---
-title: "Homework #1: Jump Start with RMarkdown"
+title: "Practise Homework: Jump Start with RMarkdown"
 subtitle: "Monte Carlos Approximation"
 author:
   - Yuqian Liu^[<yuqian.liu@uconn.edu>; Ph.D. student at
@@ -13,14 +13,14 @@ biblio-style: datalab
 keywords: Approximation, Monte Carlo, Normal Destribution, R Markdown, bookdown
 # keywords set in YAML header here only go to the properties of the PDF output
 # the keywords that appear in PDF output are set in latex/before_body.tex
-output: pdf_documnet
-# bookdown::pdf_document
-# bookdown::html_document
+output: 
+ bookdown::pdf_document
+ bookdown::html_document
 abstract: |
-    This is the first homework for STAT5361 Statistical Computat     ion which is 
+    This is the first homework for STAT5361 Statistical Computation which is 
     designed for getting familiar with RMarkdown. In this homework, I will 
     approximate one integration by Monte Carlo method with sampling 
-    from Normal distribution function N(0,1). The experiments would be 
+    from Normal distribution function $N(0,1)$. The experiments would be 
     conducted at 3 different sample sizes, with 9 different upper limits. 
     The key-step derivation and results will be presented. Ture values will
     also be calculated as reference.
@@ -57,24 +57,30 @@ knitr::opts_chunk$set(fig.width = 5, fig.height = 4, dpi = 300,
 
 # Introduction {#sec:intro}
 
-Homework 1 is using the template provided by Wenjie Wang to organize ...
-This document is designed as a template for data science lab projects.  However,
-it can also be used as a general template in `r proglang("R Markdown")` for a
-single document.
+This homework is using the template provided by Wenjie Wang. The purpose of this 
+homework is to let us get familiar with RMarkdown. 
 
 
-Introduce Monte Carlo method
+The problem is about to approximate the value of Cumulative Distribution Function
+(C. D. F.) by [Monte Carlo methods][wiki], which are computational algorithms 
+that rely on repeated random sampling to obtain numerical results.The CDF of a 
+continuous random variable X can be expressed as the integral of its probability 
+density function. In this problem, it is Normal distribution function $N(0,1)$. 
+The experiments would be conducted with 3 different sample sizes, to approximate
+integration value with 9 different upper limits. Then, each case will be 
+repeated 100 times.
 
 
 The rest of this homework is organized as follows: Section \@ref(sec:problem)
 will give problem discription. In Section \@ref(sec:math),
 mathematical derivation will be illustrated. The procedure of solving this
-integration will be presented step by step. The results of different scenarios
-will be given in Section \@ref(sec:results). The ture value of the integrals 
-will also be calculated as references. After repeating each case 100 times, 
-Section \@ref(sec:figure) will give box plots of the bias. The code chunk of this
-homework's calculation is given in Section \@ref(sec:code). In the end, summary and
-discussion will be presented in Section \@ref(sec:summary).
+integration will be presented step by step. The one-run results of different 
+scenarios will be given in Section \@ref(sec:results). The ture value of the 
+integrals will also be calculated as references. After repeating each case 
+100 times, Section \@ref(sec:figure) will give box plots of the bias. Discussion
+based on those plots will be presented. The code chunk of this homework's 
+calculation is given in Section \@ref(sec:code). In the end, summary will 
+be presented in Section \@ref(sec:summary).
 
 
 
@@ -134,7 +140,7 @@ based on samples from **Step 3**.
 
 
 
-# Results  {#sec:results}
+# Results for One-time Run  {#sec:results}
 
 The approximations with one-time run at $n\in\{{10^2},{10^3},{10^4}\}$ and 
 $t\in\{0.0,0.67,0.84,1.28,1.65,2.32,2.58,3.09,3.72\}$ are  shown in Table
@@ -149,11 +155,12 @@ knitr::kable(final_data_1, caption = 'Ture Values and Prediction Values', bookta
 
 
 
-# Figures {#sec:figure}
+# Results for 100-times Run {#sec:figure}
 
-After repeating each case 100 times, box plots are used to demonstrate results. Figure \@ref(fig:s100) 
-shows predictions with 100 samples. Predictions with 1000 and 10000 samples are shown in Figure \@ref(fig:s1000)
-and Figure \@ref(fig:s10000) respectively. One of boxplot code chunk is shown as follow.
+Next step is repeating each case 100 times. Box plots are generated to demonstrate results. 
+Figure \@ref(fig:s100) shows predictions with 100 random samples. Predictions with 1000 
+and 10000 samples are shown in Figure \@ref(fig:s1000) and Figure \@ref(fig:s10000) 
+respectively. One of code chunks how to plot box plots is shown as follow.
 
 <!-- caption of figure may be defined as follows: -->
 
@@ -165,44 +172,37 @@ boxplot(Pred_100 ~ t, data = final_data_100, xlab = "t",ylab = "Predictions")
 ```{r s1000, echo = FALSE, fig.cap = "100-run Predictions with 1000 samples", fig.width = 8}
 boxplot(Pred_1000 ~ t, data = final_data_100, xlab = "t",ylab = "Predictions")
 ```
-```{r s10000, echo = FALSE, fig.cap = "100-run Predictions with 10000 samples", fig.width = 8}
+```{r s10000,echo = FALSE, fig.cap = "100-run Predictions with 10000 samples",fig.width = 8}
 boxplot(Pred_10000 ~ t, data = final_data_100, xlab = "t",ylab = "Predictions")
 ```
 
-If we would like to see box plots of bias for case with different sample sizes, Figure \@ref(fig:bias100), 
-\@ref(fig:bias1000) and \@ref(fig:bias10000) are given as follow.
-```{r bias100, echo = FALSE, fig.cap = "Bias of 100-run Predictions with 100 samples", fig.width = 8}
+If we would like to see box plots of bias for cases with different sample sizes, Figure 
+\@ref(fig:bias100), \@ref(fig:bias1000) and \@ref(fig:bias10000) are given as follow.
+
+(ref:bias100) Bias of 100-run Predictions with 100 samples.
+
+```{r bias100, echo = FALSE, fig.cap = "(ref:bias100)", fig.width = 8}
 boxplot(bias_100 ~ t, data = final_data_bias, xlab = "t",ylab = "Prediction Bias")
 ```
-```{r bias1000, echo = FALSE, fig.cap = "Bias of 100-run Predictions with 1000 samples", fig.width = 8}
+
+(ref:bias1000) Bias of 100-run Predictions with 1000 samples.
+
+```{r bias1000, echo = FALSE, fig.cap = "(ref:bias1000)", fig.width = 8}
 boxplot(bias_1000 ~ t, data = final_data_bias, xlab = "t",ylab = "Prediction Bias")
 ```
-```{r bias10000, echo = FALSE, fig.cap = "Bias of 100-run Predictions with 10000 samples", fig.width = 8}
+
+(ref:bias10000) Bias of 100-run Predictions with 10000 samples.
+
+```{r bias10000, echo = FALSE, fig.cap = "(ref:bias10000)", fig.width = 8}
 boxplot(bias_10000 ~ t, data = final_data_bias, xlab = "t",ylab = "Prediction Bias")
 ```
-
-
-(ref:cap-miSplines) Quadratic M-spline (left) and I-spline (right) Bases with
-three internal knots.
-
-
-
-In the code chunk shown above, the chunk option `out.width = '45%'` and
-`fig.show = 'hold'` were set so that the plots were placed side by side.  We may
-set the chunk option `echo = FALSE` so that the code chunk generating the plots
-are excluded from the output. Also, the chunk option `cache` can be set to be
-`TRUE` for time-consuming code chunks once the code chunk is unlikely to be
-modified.
-
+Based on results, with increasing sample size, the predictions present smaller bias.
+If the algorithm works well, we could say more accurate approximation would be obtained.
 
 
 # Code Chunk {#sec:code}
 
-In addition to `r proglang("R")`, the code chunk can be written in a variety of
-other languages, such as `r proglang("Bash")`, `r proglang("Python")`,
-`r proglang("SAS")`, etc., by specifying the chunk option `engine`.
-The following code chunk is one toy example written in `r proglang("Python 3")`.
-
+The code chunk of major calculation is given as follow,
 <!-- note that we actually set eval to be FALSE here so that readers are able to
 reproduce this template without Python 3. -->
 
@@ -237,8 +237,10 @@ Pred_Phi_10000 <- function(x){
 Pred_1_100 <- sapply(t,Pred_Phi_100)
 Pred_1_1000 <- sapply(t,Pred_Phi_1000)
 Pred_1_10000 <- sapply(t,Pred_Phi_10000)
-final_data_1 <- data.frame(t = t, `Ture Value`= ture_Phi, `n = 100` = Pred_1_100, `n = 1000` = Pred_1_1000,
-                           `n = 10000` = Pred_1_10000, stringsAsFactors = FALSE, check.names = FALSE)
+final_data_1 <- data.frame(t = t, `Ture Value`= ture_Phi, `n = 100` = Pred_1_100, 
+                           `n = 1000` = Pred_1_1000,
+                           `n = 10000` = Pred_1_10000, stringsAsFactors = FALSE, 
+                           check.names = FALSE)
 
 ## 100-time experiment
 # T <- matrix(rep(t,each = 100), nrow = 100)
@@ -256,7 +258,8 @@ Pred100_1000 <- array(Pred_100_1000,c(100,9)) #reshape
 Pred_100_10000 <- sapply(T,Pred_Phi_10000)
 Pred100_10000 <- array(Pred_100_10000,c(100,9)) #reshape
 
-final_data_100 <- data.frame(t = T, Pred_100 = Pred_100_100, Pred_1000 = Pred_100_1000, Pred_10000 = Pred_100_10000)
+final_data_100 <- data.frame(t = T, Pred_100 = Pred_100_100, Pred_1000 = Pred_100_1000, 
+                             Pred_10000 = Pred_100_10000)
 
 ## get predictions' bias
 # mean of predictions
@@ -270,9 +273,9 @@ Mean10000 <- rep(mean10000,each = 100)
 bias100 <- Pred_100_100 - Mean100
 bias1000 <- Pred_100_1000 - Mean1000
 bias10000 <- Pred_100_10000 - Mean10000
-final_data_bias <- data.frame(t = T, bias_100 = bias100, bias_1000 = bias1000, bias_10000 = bias10000)
+final_data_bias <- data.frame(t = T, bias_100 = bias100, bias_1000 = bias1000, 
+                              bias_10000 = bias10000)
 ```
-
 
 The chunk option `eval = FALSE` is set, in order to present the code without evaluation.
 
@@ -280,36 +283,21 @@ The chunk option `eval = FALSE` is set, in order to present the code without eva
 
 # Summary {#sec:summary}
 
-In this homework, I am getting farmiliar with R lan
-In summary, we provided this project template and reviewed most common
-components and their syntax of writing a single `r proglang("R Markdown")`
-document with the power and love of `r pkg("bookdown")` and many other fantastic
-packages.
+I approximated the integration accurately by Monte Carlo Methods. I used the 
+template to report what I have done for this practise.  I tried some functions 
+and syntax of writing a $.Rmd$ document. Overall, through this homework, I am 
+getting familiar with R and RMarkdown. 
 
-
-@xie2017bookdown provided a thorough introduction to `r pkg("bookdown")`
-including more advanced customization and other output formats.
-Additionally, the [manual][pandocManual] of `r pkg("Pandoc")` gives all the
-available options that can be specified through the `r proglang("YAML")`
-metadata section.
-
-
-The template source and other associated files, such as BibTeX and CSS file, are
-available at our GitHub repository
-*dslab-templates*: <https://github.com/statds/dslab-templates>.
 
 
 # Acknowledgment {-}
 
-Thanks to Wenjie Wang's template and all the other authors and contributors.
+Thanks to Wenjie Wang's template, which isavailable at GitHub repository
+*dslab-templates*: <https://github.com/statds/dslab-templates>.
+And thanks to all the other authors and contributors.
 
 
 # Reference {-}
 
 
-[pandoc]: http://pandoc.org/
-[pandocManual]: http://pandoc.org/MANUAL.html
-[repo]: https://github.com/wenjie2wang/datalab-templates
-[taskView]: https://cran.r-project.org/web/views/ReproducibleResearch.html
-[shiny.io]: https://www.shinyapps.io/
-[wenjie-stat.shinyapps]: https://wwenjie-stat.shinyapps.io/minisplines2
+[wiki]: https://en.wikipedia.org/wiki/Monte_Carlo_method
